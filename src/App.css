@@ -46,6 +46,9 @@
 .innerYoutubeFormWrapper input[type="text"] {
   padding: 5px 10px;
 }
+.innerYoutubeFormWrapper input[type="number"] {
+  padding: 5px 10px;
+}
 .error {
   color: red;
   font-size: 12px;

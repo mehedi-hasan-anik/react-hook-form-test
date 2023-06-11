@@ -13,6 +13,8 @@ type FormValues = {
   phNumbers: {
     number: string;
   }[];
+  age: number;
+  dob: Date;
 };
 let renderCount = 0;
 
@@ -28,6 +30,8 @@ function YouTubeForm() {
       },
       phoneNumbers: ["", ""],
       phNumbers: [{ number: "" }],
+      age: 0,
+      dob: new Date(),
     },
   });
   const { register, control, handleSubmit, formState } = form;
@@ -138,6 +142,37 @@ function YouTubeForm() {
               {...register("phoneNumbers.1")}
             />
             <p></p>
+          </div>
+
+          <div className="singleSection">
+            <label htmlFor="age">Age: </label>
+            <input
+              type="number"
+              id="age"
+              {...register("age", {
+                required: {
+                  value: true,
+                  message: "age is required",
+                },
+              })}
+            />
+            <p className="error">{errors?.age?.message}</p>
+          </div>
+
+          <div className="singleSection">
+            <label htmlFor="dob">Date of Birth: </label>
+            <input
+              type="date"
+              id="dob"
+              {...register("dob", {
+                valueAsDate: true,
+                required: {
+                  value: true,
+                  message: "Date of Birth is required",
+                },
+              })}
+            />
+            <p className="error">{errors?.dob?.message}</p>
           </div>
 
           <div className="singleSection">
