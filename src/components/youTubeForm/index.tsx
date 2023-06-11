@@ -1,4 +1,5 @@
 import { DevTool } from "@hookform/devtools";
+import { useEffect } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 
 type FormValues = {
@@ -34,7 +35,7 @@ function YouTubeForm() {
       dob: new Date(),
     },
   });
-  const { register, control, handleSubmit, formState } = form;
+  const { register, control, handleSubmit, formState, watch } = form;
   const { errors } = formState;
 
   const { fields, append, remove } = useFieldArray({
@@ -45,6 +46,15 @@ function YouTubeForm() {
   const onSubmit = (data: FormValues) => {
     console.log("Form submitted", data);
   };
+  const watchUserName = watch(["userName", "email"]);
+
+  useEffect(() => {
+    const subscription = watch((value) => {
+      console.log(value);
+    });
+    return () => subscription.unsubscribe();
+  }, [watch]);
+
   renderCount++;
 
   return (
@@ -52,6 +62,7 @@ function YouTubeForm() {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="innerYoutubeFormWrapper">
           <h1>YouTube Form ({renderCount / 2})</h1>
+          <h2>{watchUserName}</h2>
 
           <div className="singleSection">
             <label htmlFor="userName">Username: </label>
