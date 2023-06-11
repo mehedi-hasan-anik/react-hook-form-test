@@ -1,5 +1,5 @@
 import { DevTool } from "@hookform/devtools";
-import { useForm } from "react-hook-form";
+import { useFieldArray, useForm } from "react-hook-form";
 
 type FormValues = {
   userName: string;
@@ -10,6 +10,9 @@ type FormValues = {
     facebook: string;
   };
   phoneNumbers: string[];
+  phNumbers: {
+    number: string;
+  }[];
 };
 let renderCount = 0;
 
@@ -24,10 +27,16 @@ function YouTubeForm() {
         facebook: "",
       },
       phoneNumbers: ["", ""],
+      phNumbers: [{ number: "" }],
     },
   });
   const { register, control, handleSubmit, formState } = form;
   const { errors } = formState;
+
+  const { fields, append, remove } = useFieldArray({
+    name: "phNumbers",
+    control,
+  });
 
   const onSubmit = (data: FormValues) => {
     console.log("Form submitted", data);
@@ -102,11 +111,13 @@ function YouTubeForm() {
           <div className="singleSection">
             <label htmlFor="twitter">Twitter: </label>
             <input type="text" id="twitter" {...register("social.twitter")} />
+            <p></p>
           </div>
 
           <div className="singleSection">
             <label htmlFor="facebook">Facebook: </label>
             <input type="text" id="facebook" {...register("social.facebook")} />
+            <p></p>
           </div>
 
           <div className="singleSection">
@@ -116,6 +127,7 @@ function YouTubeForm() {
               id="primary-phone"
               {...register("phoneNumbers.0")}
             />
+            <p></p>
           </div>
 
           <div className="singleSection">
@@ -125,10 +137,37 @@ function YouTubeForm() {
               id="secondary-phone"
               {...register("phoneNumbers.1")}
             />
+            <p></p>
           </div>
 
           <div className="singleSection">
-            <button type="submit">Submit</button>
+            <label htmlFor="secondary-phone">List of phone number: </label>
+            {fields?.map((field, index) => {
+              return (
+                <div className="singleSection" key={index}>
+                  <div className="listField">
+                    <input
+                      type="text"
+                      {...register(`phNumbers.${index}.number` as const)}
+                    />
+                    {index > 0 && (
+                      <button type="button" onClick={() => remove(index)}>
+                        Remove
+                      </button>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+            <button type="button" onClick={() => append({ number: "" })}>
+              Add
+            </button>
+          </div>
+
+          <div className="singleSection">
+            <button type="submit" className="submitBtn">
+              Submit
+            </button>
           </div>
 
           <DevTool control={control} />

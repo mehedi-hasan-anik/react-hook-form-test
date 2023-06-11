@@ -31,10 +31,12 @@
 /* youtube form */
 .youtubeFormWrapper {
   background: grey;
-  height: 100vh;
+  height: 100%;
+  overflow-x: scroll;
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: left;
 }
 .innerYoutubeFormWrapper {
   border: 1px solid white;
@@ -48,6 +50,23 @@
   color: red;
   font-size: 12px;
 }
+.singleSection {
+  display: flex;
+  flex-direction: column;
+}
+.submitBtn {
+  margin-top: 20px;
+  padding: 10px 0px;
+  cursor: pointer;
+  background: green;
+  color: white;
+  border: none;
+}
+.listField {
+  text-align: left;
+  margin: 10px 0px;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
