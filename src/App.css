@@ -28,6 +28,26 @@
   color: #61dafb;
 }
 
+/* youtube form */
+.youtubeFormWrapper {
+  background: grey;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.innerYoutubeFormWrapper {
+  border: 1px solid white;
+  padding: 20px;
+  color: "white";
+}
+.innerYoutubeFormWrapper input[type="text"] {
+  padding: 5px 10px;
+}
+.error {
+  color: red;
+  font-size: 12px;
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
