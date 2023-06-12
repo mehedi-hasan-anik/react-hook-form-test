@@ -35,7 +35,15 @@ function YouTubeForm() {
       dob: new Date(),
     },
   });
-  const { register, control, handleSubmit, formState, watch, getValues } = form;
+  const {
+    register,
+    control,
+    handleSubmit,
+    formState,
+    watch,
+    getValues,
+    setValue,
+  } = form;
   const { errors } = formState;
 
   const { fields, append, remove } = useFieldArray({
@@ -59,6 +67,14 @@ function YouTubeForm() {
     console.log("getValues1", getValues());
     console.log("getValues2", getValues("social.facebook"));
     console.log("getValues3", getValues(["userName", "channel"]));
+  };
+
+  const hadleSetValues = () => {
+    setValue("userName", "", {
+      shouldValidate: true,
+      shouldDirty: true,
+      shouldTouch: true,
+    });
   };
 
   renderCount++;
@@ -222,6 +238,9 @@ function YouTubeForm() {
             </button>
             <button type="button" onClick={hadleGetValues}>
               Get values
+            </button>
+            <button type="button" onClick={hadleSetValues}>
+              Set values
             </button>
           </div>
 
