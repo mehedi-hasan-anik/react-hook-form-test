@@ -43,6 +43,7 @@ function YouTubeForm() {
     watch,
     getValues,
     setValue,
+    reset,
   } = form;
   const {
     errors,
@@ -94,6 +95,12 @@ function YouTubeForm() {
       shouldTouch: true,
     });
   };
+
+  useEffect(() => {
+    if (isSubmitSuccessful) {
+      reset();
+    }
+  }, [isSubmitSuccessful, reset]);
 
   renderCount++;
 
@@ -259,6 +266,9 @@ function YouTubeForm() {
             </button>
             <button type="button" onClick={hadleSetValues}>
               Set values
+            </button>
+            <button type="button" onClick={() => reset()}>
+              Reset
             </button>
           </div>
 
