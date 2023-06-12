@@ -35,7 +35,7 @@ function YouTubeForm() {
       dob: new Date(),
     },
   });
-  const { register, control, handleSubmit, formState, watch } = form;
+  const { register, control, handleSubmit, formState, watch, getValues } = form;
   const { errors } = formState;
 
   const { fields, append, remove } = useFieldArray({
@@ -54,6 +54,12 @@ function YouTubeForm() {
     });
     return () => subscription.unsubscribe();
   }, [watch]);
+
+  const hadleGetValues = () => {
+    console.log("getValues1", getValues());
+    console.log("getValues2", getValues("social.facebook"));
+    console.log("getValues3", getValues(["userName", "channel"]));
+  };
 
   renderCount++;
 
@@ -213,6 +219,9 @@ function YouTubeForm() {
           <div className="singleSection">
             <button type="submit" className="submitBtn">
               Submit
+            </button>
+            <button type="button" onClick={hadleGetValues}>
+              Get values
             </button>
           </div>
 
