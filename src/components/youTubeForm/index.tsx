@@ -44,7 +44,18 @@ function YouTubeForm() {
     getValues,
     setValue,
   } = form;
-  const { errors, touchedFields, dirtyFields, isDirty, isValid } = formState;
+  const {
+    errors,
+    touchedFields,
+    dirtyFields,
+    isDirty,
+    isValid,
+    isSubmitting,
+    isSubmitted,
+    isSubmitSuccessful,
+    submitCount,
+  } = formState;
+  console.log({ isSubmitting, isSubmitted, isSubmitSuccessful, submitCount });
 
   console.log(touchedFields, dirtyFields, isDirty, isValid);
 
@@ -240,11 +251,7 @@ function YouTubeForm() {
           </div>
 
           <div className="singleSection">
-            <button
-              type="submit"
-              className="submitBtn"
-              disabled={!isDirty || !isValid}
-            >
+            <button type="submit" className="submitBtn">
               Submit
             </button>
             <button type="button" onClick={hadleGetValues}>
