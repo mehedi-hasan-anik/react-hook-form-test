@@ -44,9 +44,9 @@ function YouTubeForm() {
     getValues,
     setValue,
   } = form;
-  const { errors, touchedFields, dirtyFields, isDirty } = formState;
+  const { errors, touchedFields, dirtyFields, isDirty, isValid } = formState;
 
-  console.log(touchedFields, dirtyFields, isDirty);
+  console.log(touchedFields, dirtyFields, isDirty, isValid);
 
   const { fields, append, remove } = useFieldArray({
     name: "phNumbers",
@@ -240,7 +240,11 @@ function YouTubeForm() {
           </div>
 
           <div className="singleSection">
-            <button type="submit" className="submitBtn">
+            <button
+              type="submit"
+              className="submitBtn"
+              disabled={!isDirty || !isValid}
+            >
               Submit
             </button>
             <button type="button" onClick={hadleGetValues}>
