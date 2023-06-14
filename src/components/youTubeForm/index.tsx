@@ -34,6 +34,10 @@ function YouTubeForm() {
       age: 0,
       dob: new Date(),
     },
+    // mode: "onBlur",
+    // mode: "onTouched",
+    // mode: "onChange",
+    mode: "all",
   });
   const {
     register,
