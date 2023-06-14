@@ -37,7 +37,8 @@ function YouTubeForm() {
     // mode: "onBlur",
     // mode: "onTouched",
     // mode: "onChange",
-    mode: "all",
+    // mode: "all",
+    mode: "onSubmit",
   });
   const {
     register,
@@ -48,6 +49,7 @@ function YouTubeForm() {
     getValues,
     setValue,
     reset,
+    trigger,
   } = form;
   const {
     errors,
@@ -284,6 +286,9 @@ function YouTubeForm() {
             </button>
             <button type="button" onClick={() => reset()}>
               Reset
+            </button>
+            <button type="button" onClick={() => trigger("channel")}>
+              Validate
             </button>
           </div>
 
