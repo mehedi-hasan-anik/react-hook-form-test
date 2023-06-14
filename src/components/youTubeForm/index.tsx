@@ -149,6 +149,13 @@ function YouTubeForm() {
                       "This domain is not supported"
                     );
                   },
+                  emailAvailable: async (fieldValue) => {
+                    const response = await fetch(
+                      `https://jsonplaceholder.typicode.com/users?email=${fieldValue}`
+                    );
+                    const data = await response.json();
+                    return data.length == 0 || "Email already exists";
+                  },
                 },
               })}
             />
@@ -258,7 +265,11 @@ function YouTubeForm() {
           </div>
 
           <div className="singleSection">
-            <button type="submit" className="submitBtn">
+            <button
+              type="submit"
+              className="submitBtn"
+              disabled={!isDirty || isSubmitting}
+            >
               Submit
             </button>
             <button type="button" onClick={hadleGetValues}>
